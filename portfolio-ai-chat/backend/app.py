@@ -174,7 +174,7 @@ def projects():
             "title": "Movie Ticket Booking Platform (MERN)",
             "description": "Online movie booking system with seat reservation.",
             "technologies": ["MongoDB", "Express", "React", "Node.js"],
-            "image": "",
+            "image": "#",
             "link": "#",
             "github": "#"
         }
