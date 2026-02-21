@@ -188,7 +188,7 @@ def get_portfolio():
         'title': 'Aspiring Developer',
         'email': 'sanapvaibhav8767@gmail.com',
         'phone': '',
-        'summary': 'Aspiring developer building web and AI projects.',
+        'summary': 'Aspiring developer building web applications and exploring AI/ML.    Focused on modern web stacks and real-world projects.',
         'resumeContent': PORTFOLIO_DATA
     }), 200
 
