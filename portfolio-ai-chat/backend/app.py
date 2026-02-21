@@ -61,7 +61,7 @@ PROJECTS:
 # OpenRouter Setup
 # ----------------------------
 OPENROUTER_API_KEY = os.getenv('OPENROUTER_API_KEY', '').strip()
-MODEL = "meta-llama/llama-2-7b-chat"
+MODEL = "openai/gpt-3.5-turbo"
 
 def get_ai_response(user_message):
     try:
