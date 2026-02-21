@@ -43,7 +43,7 @@ class ChatMessage(db.Model):
 # Portfolio Data
 # ----------------------------
 PORTFOLIO_DATA = """
-FULL NAME: Viabhav Sanap
+FULL NAME: Vaibhav Sanap
 TITLE: Aspiring Developer
 EMAIL: sanapvaibhav8767@gmail.com
 
@@ -70,7 +70,7 @@ def get_ai_response(user_message):
 
         headers = {
             "Authorization": f"Bearer {OPENROUTER_API_KEY}",
-            "HTTP-Referer": "https://your-vercel-app.vercel.app",
+            "HTTP-Referer": "https://portfolio-ai-chat.vercel.app",
             "X-Title": "Portfolio AI Chat"
         }
 
@@ -110,6 +110,7 @@ Answer professionally based only on the provided information.
 # ----------------------------
 # Routes
 # ----------------------------
+
 @app.route('/api/health', methods=['GET'])
 def health():
     return jsonify({'status': 'healthy'}), 200
@@ -127,7 +128,6 @@ def chat():
 
         ai_response = get_ai_response(user_message)
 
-        # Save to DB
         message = ChatMessage(
             user_message=user_message,
             ai_response=ai_response,
@@ -159,20 +159,74 @@ def projects():
             "image": "",
             "link": "#",
             "github": "#"
+        },
+        {
+            "id": 2,
+            "title": "Crime Prediction and Analysis System",
+            "description": "Machine learning based crime hotspot prediction platform.",
+            "technologies": ["Python", "React", "MongoDB"],
+            "image": "",
+            "link": "#",
+            "github": "#"
+        },
+        {
+            "id": 3,
+            "title": "Movie Ticket Booking Platform (MERN)",
+            "description": "Online movie booking system with seat reservation.",
+            "technologies": ["MongoDB", "Express", "React", "Node.js"],
+            "image": "",
+            "link": "#",
+            "github": "#"
         }
     ])
 
 
-# ----------------------------
-# IMPORTANT FIX FOR RAILWAY
-# ----------------------------
+@app.route('/api/portfolio', methods=['GET'])
+def get_portfolio():
+    return jsonify({
+        'fullName': 'Vaibhav Sanap',
+        'title': 'Aspiring Developer',
+        'email': 'sanapvaibhav8767@gmail.com',
+        'phone': '',
+        'summary': 'Aspiring developer building web and AI projects.',
+        'resumeContent': PORTFOLIO_DATA
+    }), 200
 
-# ✅ This runs in production (Gunicorn)
+
+@app.route('/api/skills', methods=['GET'])
+def get_skills():
+    return jsonify({
+        'frontend': ['React', 'TypeScript', 'Tailwind CSS'],
+        'backend': ['Python', 'Flask', 'Node.js'],
+        'databases': ['MongoDB', 'SQL'],
+        'devops': [],
+        'ai_ml': ['OpenAI API', 'NLP'],
+        'tools': ['Git', 'VS Code']
+    }), 200
+
+
+@app.route('/api/experience', methods=['GET'])
+def get_experience():
+    return jsonify([
+        {
+            'id': 1,
+            'title': 'Aspiring Developer',
+            'company': 'Self Projects',
+            'duration': 'Present',
+            'description': 'Building full stack and AI projects.',
+            'technologies': ['React', 'Python']
+        }
+    ]), 200
+
+
+# ----------------------------
+# IMPORTANT: Create Tables (Railway Fix)
+# ----------------------------
 with app.app_context():
     db.create_all()
 
 # ----------------------------
-# Local Development Only
+# Run Locally
 # ----------------------------
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=int(os.environ.get("PORT", 5000)))
